@@ -60,9 +60,8 @@ def WriteFileList(dir, fileList,label,data_set):
     file.close()
     
 if __name__=='__main__':
-    #RootDir="/DATACENTER2/qionghua.he/data/MS_CELEB/MTCNN-Faces-Aligned1.0/"
-    RootDir="/DATACENTER2/qionghua.he/data/MS_CELEB/Unbluring_clean/"
-    #RootDir="/DATACENTER2/qionghua.he/data/VGGFace/train/"
+    #RootDir="/DATACENTER2/qionghua.he/data/MS_CELEB/MTCNN-Faces-Aligned1.1_10K"
+    RootDir="/DATACENTER2/qionghua.he/data/MS_CELEB/unclean1.2_10K_0.4_clean/"
     data_set=10000
 
     name_map1=get_name_map('/home/qionghua.he/data/tools/LFW_MS_overlap.txt')
@@ -87,10 +86,10 @@ if __name__=='__main__':
             Dir=os.path.join(RootDir,s)
             if not os.path.isfile(Dir):
                 list = GetFileList(Dir, [])
-                if len(list)<75: continue #list length<20,then the folder wont used for training
-                else:
-                    WriteFileList(Dir,list,str(label),str(data_set))
-                    label=label+1
-                    if(label==data_set): break
+                #if len(list)<75: continue #list length<20,then the folder wont used for training
+                #else:
+                WriteFileList(Dir,list,str(label),str(data_set))
+                label=label+1
+                if(label==data_set): break
         print label
     print 'Write Output.txt Done!!!'

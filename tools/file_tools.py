@@ -1,21 +1,9 @@
-# -*- coding: utf-8 -*-
 import os
 import shutil
 import time
 from multiprocessing import Process
-import sys
-reload(sys)
-sys.setdefaultencoding('utf8')
 
-def get_img_list(dir,img_list):
-    if os.path.isfile(dir):
-        img_list.append(dir) #encode('utf-8')) #decode('gbk').encode('utf-8'))
-    elif os.path.isdir(dir):
-        for s in os.listdir(dir):
-            newDir=os.path.join(dir,s)
-            get_img_list(newDir,img_list)
-    return img_list
-        
+
 def count_dirs(dir):
 	#this is to count the number of files which is in the 'dir'
 	subdirs=os.listdir(dir)
@@ -37,8 +25,7 @@ def get_min_foder(dir,num):
 		if(file_num<num): 
 			return file_num
 		else: continue
-        return -1
-
+	return -1
 
 	
 def copy_folders_by_folderName(sub_folder,src_root,dst_root):
@@ -114,18 +101,15 @@ def move_folders_by_file(file_name,src_root,dst_root):
 		proc.join()
 
 	print "move_folders_by_file ",time.time()-t
-def copy_images_to_one_folder(src_folder,dst_folder):
-    img_list=get_img_list(src_folder,[])
-    print len(img_list) 
-    for item in img_list:
-        #if  os.path.exists(dst_folder):
-        #        shutil.rmtree(dst_folder)
-        shutil.copy(item,dst_folder)
+
+
+
+
+if __name__=='__main__':
+    # file_name='VGGFace2_LFW_overlap.txt'
+    # src_root='/DATACENTER2/qionghua.he/data/VGGFace/train_overlap_/'
+    # dst_root='/DATACENTER2/qionghua.he/data/VGGFace/train_overlap/'
+    # move_folders_by_file(file_name,src_root,dst_root)
     
-if  __name__=='__main__':
-	# file_name='VGGFace2_LFW_overlap.txt'
-	# src_root='/DATACENTER2/qionghua.he/data/VGGFace/train_overlap_/'
-	# dst_root='/DATACENTER2/qionghua.he/data/VGGFace/train_overlap/'
-	# move_folders_by_file(file_name,src_root,dst_root)
-        #get_min_foder(dir,num)
-        copy_images_to_one_folder(r'/DATACENTER1/qionghua.he/data/HuiFu/汇富v2/Frames_ssd',r'/DATACENTER2/qionghua.he/data/HuiFu/汇富v2/test')
+    num=75
+    print 'the minimal file_num is ',get_min_foder('/DATACENTER2/qionghua.he/data/MS_CELEB/MTCNN-Faces-Aligned1.1_10K',num)
